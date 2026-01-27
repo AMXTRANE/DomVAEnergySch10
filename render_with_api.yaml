@@ -1,0 +1,38 @@
+services:
+  # Web Service - API Server that your device calls
+  - type: web
+    name: dominion-energy-api
+    env: python
+    region: oregon  # Choose closest to you: oregon, ohio, virginia, etc.
+    plan: free  # Free tier includes 750 hours/month
+    buildCommand: pip install -r requirements_api.txt
+    startCommand: gunicorn -w 2 -b 0.0.0.0:$PORT api_server_with_get:app
+    envVars:
+      - key: API_KEY
+        sync: false  # Set in Render dashboard
+      - key: DATA_FILE
+        value: "/opt/render/project/src/latest_schedule.json"
+      - key: PORT
+        value: "10000"
+    # Disk for persistent storage
+    disk:
+      name: schedule-data
+      mountPath: /opt/render/project/src
+      sizeGB: 1
+
+  # Cron Job - Fetches data daily and sends to API
+  - type: cron
+    name: dominion-energy-extractor
+    env: python
+    schedule: "0 23 * * *"  # 6 PM EST = 11 PM UTC (winter)
+    buildCommand: pip install -r requirements.txt
+    startCommand: python dominion_energy_extractor_render.py
+    envVars:
+      - key: API_ENDPOINT
+        value: "https://dominion-energy-api.onrender.com/dominion-schedule"  # Update with your actual URL
+      - key: API_KEY
+        sync: false  # Must match the API_KEY in web service
+      - key: DAYS_AHEAD
+        value: "7"
+      - key: TZ
+        value: "America/New_York"
