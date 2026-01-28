@@ -24,7 +24,7 @@ services:
   - type: cron
     name: dominion-energy-extractor
     env: python
-    schedule: "0 23 * * *"  # 6 PM EST = 11 PM UTC (winter)
+    schedule: "5 22 * * *"  # 6 PM EST = 11 PM UTC (winter)
     buildCommand: pip install -r requirements.txt
     startCommand: python dominion_energy_extractor_render.py
     envVars:
