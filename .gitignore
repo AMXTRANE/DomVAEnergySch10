@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+venv/
+config.json
+.env
+*.log
+latest_schedule.json
+.DS_Store

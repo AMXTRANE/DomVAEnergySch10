@@ -1,0 +1,33 @@
+name: Fetch Dominion Energy Schedule
+
+on:
+  schedule:
+    # Runs at 11 PM UTC daily (6 PM EST in winter, 7 PM EST in summer)
+    - cron: '0 23 * * *'
+  workflow_dispatch:  # Allows manual trigger from GitHub UI
+
+jobs:
+  fetch-schedule:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install requests
+    
+    - name: Run extractor
+      env:
+        API_ENDPOINT: ${{ secrets.API_ENDPOINT }}
+        API_KEY: ${{ secrets.API_KEY }}
+        DAYS_AHEAD: 7
+        TZ: America/New_York
+      run: |
+        python dominion_energy_extractor_render.py
