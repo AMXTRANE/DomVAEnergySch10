@@ -31,12 +31,3 @@ jobs:
         TZ: America/New_York
       run: |
         python dominion_energy_extractor_render.py
-```
-
----
-
-## File 3: Verify GitHub Secret
-
-Your `API_ENDPOINT` secret should be exactly:
-```
-https://domvaenergysch10.onrender.com/dominion-schedule
