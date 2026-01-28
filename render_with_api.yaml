@@ -29,7 +29,8 @@ services:
     startCommand: python dominion_energy_extractor_render.py
     envVars:
       - key: API_ENDPOINT
-        value: "https://domvaenergysch10.onrender.com/dominion-schedule" # Update with your actual URL
+        value: "https://domvaenergysch10.onrender.com/dominion-schedule"
+          # Update with your actual URL
       - key: API_KEY
         sync: false  # Must match the API_KEY in web service
       - key: DAYS_AHEAD
