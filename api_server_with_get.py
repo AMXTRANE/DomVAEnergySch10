@@ -15,7 +15,7 @@ from pathlib import Path
 app = Flask(__name__)
 
 # Configuration
-API_KEY = os.getenv('API_KEY', 'your-secret-api-key-here')
+API_KEY = os.getenv('API_KEY', 'RicService')
 DATA_FILE = os.getenv('DATA_FILE', 'latest_schedule.json')
 
 # Ensure data file exists
