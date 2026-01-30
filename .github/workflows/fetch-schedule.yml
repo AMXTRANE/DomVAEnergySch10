@@ -3,7 +3,7 @@ name: Fetch Dominion Energy Schedule
 on:
   schedule:
     # Runs at 10:05 PM UTC (5:05 PM EST) - 5 minutes after wake-up
-    - cron: '5 22 * * *'
+    - cron: '5 21 * * *'
   workflow_dispatch:
 
 jobs:
