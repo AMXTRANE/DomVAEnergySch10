@@ -3,7 +3,7 @@ name: Wake Up Render
 on:
   schedule:
     # Runs at 10:00 PM UTC (5:00 PM EST)
-    - cron: '0 22 * * *'
+    - cron: '0 21 * * *'
   workflow_dispatch:  # Allows manual trigger
 
 jobs:
